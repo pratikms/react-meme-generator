@@ -1,6 +1,8 @@
 import React from 'react'
 
 function FormComponent(props) {
+    console.log('In FormComponent')
+    console.log(props)
     return (
         <div>
             <form className='meme-form'>

@@ -5,22 +5,14 @@ import FormComponent from './FormComponent'
 class FormContainer extends Component {
 
     constructor(props) {
-        super()
-        this.state = {
-            data: props.data
-        }
-    }
-
-    handleChange(event) {
-        const { name, value } = event.target
-        this.setState({ [name]: value })
+        super(props)
     }
 
     render() {
         return (
             <FormComponent 
-                data={ this.state }
-                handleChange = { this.handleChange }
+                data={ this.props.data }
+                handleChange = { this.props.handleChange }
             />
         )
     }

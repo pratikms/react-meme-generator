@@ -20319,7 +20319,13 @@ var _FormContainer = __webpack_require__(28);
 
 var _FormContainer2 = _interopRequireDefault(_FormContainer);
 
+var _MemeContainer = __webpack_require__(30);
+
+var _MemeContainer2 = _interopRequireDefault(_MemeContainer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -20341,6 +20347,7 @@ var MemeGenerator = function (_Component) {
             randomImage: 'https://i.imgflip.com/1bij.jpg',
             allMemeImages: []
         };
+        _this.handleChange = _this.handleChange.bind(_this);
         return _this;
     }
 
@@ -20354,9 +20361,17 @@ var MemeGenerator = function (_Component) {
             }).then(function (response) {
                 var memes = response.data.memes;
 
-                console.log(memes);
                 _this2.setState({ allMemeImages: memes });
             });
+        }
+    }, {
+        key: 'handleChange',
+        value: function handleChange(event) {
+            var _event$target = event.target,
+                name = _event$target.name,
+                value = _event$target.value;
+
+            this.setState(_defineProperty({}, name, value));
         }
     }, {
         key: 'render',
@@ -20364,7 +20379,11 @@ var MemeGenerator = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_FormContainer2.default, null)
+                _react2.default.createElement(_FormContainer2.default, {
+                    data: this.state,
+                    handleChange: this.handleChange
+                }),
+                _react2.default.createElement(_MemeContainer2.default, { data: this.state })
             );
         }
     }]);
@@ -20406,16 +20425,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var FormContainer = function (_Component) {
     _inherits(FormContainer, _Component);
 
-    function FormContainer() {
+    function FormContainer(props) {
         _classCallCheck(this, FormContainer);
 
-        return _possibleConstructorReturn(this, (FormContainer.__proto__ || Object.getPrototypeOf(FormContainer)).call(this));
+        return _possibleConstructorReturn(this, (FormContainer.__proto__ || Object.getPrototypeOf(FormContainer)).call(this, props));
     }
 
     _createClass(FormContainer, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(_FormComponent2.default, null);
+            return _react2.default.createElement(_FormComponent2.default, {
+                data: this.props.data,
+                handleChange: this.props.handleChange
+            });
         }
     }]);
 
@@ -20442,6 +20464,8 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function FormComponent(props) {
+    console.log('In FormComponent');
+    console.log(props);
     return _react2.default.createElement(
         'div',
         null,
@@ -20452,13 +20476,15 @@ function FormComponent(props) {
                 type: 'text',
                 name: 'topText',
                 value: props.data.topText,
-                placeholder: 'Top Text'
+                placeholder: 'Top Text',
+                onChange: props.handleChange
             }),
             _react2.default.createElement('input', {
                 type: 'text',
                 name: 'bottomText',
                 value: props.data.bottomText,
-                placeholder: 'Bottom Text'
+                placeholder: 'Bottom Text',
+                onChange: props.handleChange
             }),
             _react2.default.createElement(
                 'button',
@@ -20470,6 +20496,93 @@ function FormComponent(props) {
 }
 
 exports.default = FormComponent;
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _MemeComponent = __webpack_require__(31);
+
+var _MemeComponent2 = _interopRequireDefault(_MemeComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MemeContainer = function (_Component) {
+    _inherits(MemeContainer, _Component);
+
+    function MemeContainer(props) {
+        _classCallCheck(this, MemeContainer);
+
+        return _possibleConstructorReturn(this, (MemeContainer.__proto__ || Object.getPrototypeOf(MemeContainer)).call(this, props));
+    }
+
+    _createClass(MemeContainer, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(_MemeComponent2.default, { data: this.props.data });
+        }
+    }]);
+
+    return MemeContainer;
+}(_react.Component);
+
+exports.default = MemeContainer;
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function MemeComponent(props) {
+    return _react2.default.createElement(
+        'div',
+        { className: 'meme' },
+        _react2.default.createElement('img', { src: props.data.randomImage, alt: '' }),
+        _react2.default.createElement(
+            'h2',
+            { className: 'top' },
+            props.data.topText
+        ),
+        _react2.default.createElement(
+            'h2',
+            { className: 'bottom' },
+            props.data.bottomText
+        )
+    );
+}
+
+exports.default = MemeComponent;
 
 /***/ })
 /******/ ]);
