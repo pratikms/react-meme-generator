@@ -9,12 +9,14 @@ function FormComponent(props) {
                     name='topText'
                     value={ props.data.topText }
                     placeholder='Top Text'
+                    onChange={ props.handleChange }
                 />
                 <input 
                     type='text'
                     name='bottomText'
                     value={ props.data.bottomText }
                     placeholder='Bottom Text'
+                    onChange={ props.handleChange }
                 />
                 <button>Generate!</button>
             </form>
