@@ -10,8 +10,7 @@ module.exports = {
           "options": {
             "presets": [
               "babel-preset-env",
-              "babel-preset-react",
-              "cheap-module-source-map"
+              "babel-preset-react"
             ]
           }
         },

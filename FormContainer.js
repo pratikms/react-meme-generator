@@ -13,6 +13,7 @@ class FormContainer extends Component {
             <FormComponent 
                 data={ this.props.data }
                 handleChange = { this.props.handleChange }
+                handleSubmit = { this.props.handleSubmit }
             />
         )
     }
